@@ -25,8 +25,14 @@
     <button type="button" id="theme-toggle">Switch to dark theme</button>
   </header>
 
-  <div class="layout">
-    <nav id="lesson-menu" aria-label="Lessons">
+  <nav class="tabs" aria-label="Course sections">
+    <a href="#outcomes" id="tab-lesson" data-tab-link="lesson">Lesson</a>
+    <a href="#quiz" data-tab-link="quiz">Quiz</a>
+    <a href="#simulator" data-tab-link="simulator">Simulator</a>
+  </nav>
+
+  <main class="layout">
+    <nav id="lesson-menu" aria-label="Lessons" data-tab="lesson">
       <h2>Lessons</h2>
       <ol>
         <li><a href="#outcomes">What you'll learn</a></li>
@@ -40,11 +46,10 @@
         <li><a href="#operators">Equality and relational operators</a></li>
         <li><a href="#precedence">Precedence and associativity</a></li>
         <li><a href="#cast">The cast operator</a></li>
-        <li><a href="#simulator">Try it yourself</a></li>
       </ol>
     </nav>
 
-    <main>
+    <div class="lesson-content" data-tab="lesson">
       <!-- Slide 1 -->
       <section class="lesson" id="outcomes" aria-labelledby="outcomes-title">
         <h2 id="outcomes-title" tabindex="-1">What you'll learn</h2>
@@ -647,88 +652,218 @@ int main(void)
         </form>
       </section>
 
-      <!-- Not from a slide: hands-on practice with the ideas from the lessons -->
-      <section class="lesson" id="simulator" aria-labelledby="simulator-title">
-        <h2 id="simulator-title" tabindex="-1">Try it yourself</h2>
-        <p>
-          Reading about code is one thing; watching it run is another. Use
-          these two tools to experiment with the programs and conditions from
-          the lessons. Try different numbers and see what changes.
-        </p>
-        <noscript>
-          <p class="key-term">The simulator needs JavaScript turned on in your browser.</p>
-        </noscript>
-
-        <div class="sim" id="branch-sim" hidden>
-          <h3>Part 1: Step through a program</h3>
-          <p>
-            Choose a program and the number to type in. Then press
-            <strong>Step</strong> to run it one line at a time. The highlighted
-            line is the one running now. Each condition shows whether it was
-            true or false, and lines that never ran fade out at the end.
-          </p>
-          <div class="sim-controls">
-            <div>
-              <label for="sim-program">Program</label>
-              <select id="sim-program">
-                <option value="vote-if">Voting age: if</option>
-                <option value="vote-if-else">Voting age: if…else</option>
-                <option value="sales-nested">Sales bonus: nested if…else</option>
-                <option value="sales-else-if">Sales bonus: if…else if</option>
-              </select>
-            </div>
-            <div>
-              <label for="sim-input" id="sim-input-label">Age to type in</label>
-              <input type="number" id="sim-input" inputmode="numeric" step="1" value="17">
-            </div>
-          </div>
-          <div class="sim-buttons">
-            <button type="button" id="sim-step">Step</button>
-            <button type="button" id="sim-run">Run to the end</button>
-            <button type="button" id="sim-reset">Start again</button>
-          </div>
-          <p class="sim-error" id="sim-error" role="alert"></p>
-          <pre class="sim-code" id="sim-code" aria-label="Program code"></pre>
-          <h4>What happened</h4>
-          <ol class="sim-log" id="sim-log" aria-live="polite"></ol>
-          <h4>Output on screen</h4>
-          <pre class="sim-output" id="sim-output" aria-label="Program output"></pre>
-        </div>
-
-        <div class="sim" id="condition-sim" hidden>
-          <h3>Part 2: Work out a condition</h3>
-          <p>
-            Type a condition using whole numbers, brackets, arithmetic
-            (<code>+ - * / %</code>) and comparisons
-            (<code>== != &lt; &lt;= &gt; &gt;=</code>). The calculator works it
-            out one operator at a time, in the order C uses, and explains each
-            step.
-          </p>
-          <form id="calc-form">
-            <label for="calc-input">Condition</label>
-            <div class="calc-row">
-              <input type="text" id="calc-input" value="(8 - 5) &gt; 3 != 6" autocomplete="off" spellcheck="false">
-              <button type="submit">Work it out</button>
-            </div>
-          </form>
-          <p class="calc-examples">
-            Or try one of these:
-            <button type="button" class="calc-example">(8 - 5) &gt; 3 != 6</button>
-            <button type="button" class="calc-example">2 + 3 &gt; 4</button>
-            <button type="button" class="calc-example">10 % 3 == 1</button>
-            <button type="button" class="calc-example">2 * (3 + 4) &lt;= 14</button>
-            <button type="button" class="calc-example">7 / 2 == 3</button>
-          </p>
-          <div class="calc-result" id="calc-result" aria-live="polite"></div>
-        </div>
-      </section>
-
       <nav class="lesson-pager" aria-label="Previous and next lesson" hidden>
         <button type="button" id="prev-lesson">← Previous</button>
         <span id="lesson-position" aria-live="polite"></span>
         <button type="button" id="next-lesson">Next →</button>
       </nav>
-    </main>
-  </div>
+    </div>
+
+    <section class="tab-panel" id="quiz" data-tab="quiz" aria-labelledby="quiz-title">
+      <h2 id="quiz-title" tabindex="-1">Quiz</h2>
+      <p>
+        Eight questions covering the whole course. After each one you'll see
+        whether you got it right, and your score appears once you've answered
+        all eight. Nothing is saved.
+      </p>
+      <noscript>
+        <p class="key-term">The quiz needs JavaScript turned on in your browser.</p>
+      </noscript>
+      <p class="quiz-progress" id="quiz-progress"></p>
+      <div class="quiz-questions">
+        <form class="check-in quiz-question" data-answer="d" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Question 1:</span> Which of these is <em>not</em> one of the three control structures?</legend>
+            <label><input type="radio" name="quiz-1" value="a"> Sequence</label>
+            <label><input type="radio" name="quiz-1" value="b"> Selection</label>
+            <label><input type="radio" name="quiz-1" value="c"> Repetition</label>
+            <label><input type="radio" name="quiz-1" value="d"> Compilation</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is compilation. Every program can be built from sequence, selection and repetition. Compiling is how C code is turned into a program, not a way of ordering instructions.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="a" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Question 2:</span> What does this code print?</legend>
+            <pre><code>int score = 75;
+
+if (score &gt;= 50)
+{
+    printf("Pass\n");
+}
+else
+{
+    printf("Fail\n");
+}</code></pre>
+            <label><input type="radio" name="quiz-2" value="a"> Pass</label>
+            <label><input type="radio" name="quiz-2" value="b"> Fail</label>
+            <label><input type="radio" name="quiz-2" value="c"> Pass, then Fail</label>
+            <label><input type="radio" name="quiz-2" value="d"> Nothing</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is Pass. <code>75 &gt;= 50</code> is true, so the <code>if</code> body runs and the <code>else</code> body is skipped. An <code>if…else</code> always runs exactly one of its two parts.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="!=" hidden>
+          <label for="quiz-3"><span class="check-in-label">Question 3:</span> How do you write "not equal to" in C? Type the operator.</label>
+          <input type="text" id="quiz-3" autocomplete="off" spellcheck="false">
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is <code>!=</code>. Keyboards have no ≠ key, so C uses an exclamation mark followed by an equals sign.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="c" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Question 4:</span> In the sales bonus program, someone enters exactly 35000. Which message do they see?</legend>
+            <label><input type="radio" name="quiz-4" value="a"> You earn a bonus of 1500</label>
+            <label><input type="radio" name="quiz-4" value="b"> You earn a bonus of 500</label>
+            <label><input type="radio" name="quiz-4" value="c"> You earn a bonus of 100</label>
+            <label><input type="radio" name="quiz-4" value="d"> You are not entitled to any bonus</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is a bonus of 100. The test is <code>sales &gt; 35000</code>, and 35000 is not <em>greater than</em> 35000, so that test is false. The next test, <code>sales &gt; 10000</code>, is true.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="d" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Question 5:</span> The variable <code>age</code> holds 21. Which condition is true?</legend>
+            <label><input type="radio" name="quiz-5" value="a"> <code>age &lt; 21</code></label>
+            <label><input type="radio" name="quiz-5" value="b"> <code>age &gt; 21</code></label>
+            <label><input type="radio" name="quiz-5" value="c"> <code>age != 21</code></label>
+            <label><input type="radio" name="quiz-5" value="d"> <code>age &gt;= 21</code></label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is <code>age &gt;= 21</code>: 21 is "greater than or equal to" 21 because it is equal. The other three are all false when <code>age</code> is exactly 21.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="1|true" hidden>
+          <label for="quiz-6"><span class="check-in-label">Question 6:</span> What does <code>10 - 2 * 3 &gt; 3</code> give in C? Type a number.</label>
+          <input type="text" id="quiz-6" autocomplete="off" spellcheck="false">
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is 1 (true). <code>*</code> goes first: 2 * 3 is 6. Then <code>-</code>: 10 - 6 is 4. Last comes <code>&gt;</code>: 4 &gt; 3 is true, which gives 1.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="b" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Question 7:</span> In <code>4 + 6 / 2 == 7</code>, which operator does C work out first?</legend>
+            <label><input type="radio" name="quiz-7" value="a"> <code>+</code></label>
+            <label><input type="radio" name="quiz-7" value="b"> <code>/</code></label>
+            <label><input type="radio" name="quiz-7" value="c"> <code>==</code></label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is <code>/</code>. Division has higher precedence than addition, and both come before <code>==</code>. So C works out 6 / 2 = 3, then 4 + 3 = 7, then 7 == 7, which is true.</p>
+          </div>
+        </form>
+        <form class="check-in quiz-question" data-answer="a" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Question 8:</span> Which line correctly converts the <code>float</code> variable <code>price</code> to an <code>int</code>?</legend>
+            <label><input type="radio" name="quiz-8" value="a"> <code>(int) price</code></label>
+            <label><input type="radio" name="quiz-8" value="b"> <code>int(price)</code></label>
+            <label><input type="radio" name="quiz-8" value="c"> <code>price(int)</code></label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is <code>(int) price</code>. A cast puts the type you want in round brackets in front of the value: <code>(type_name) expression</code>.</p>
+          </div>
+        </form>
+      </div>
+      <div class="quiz-score" id="quiz-score" tabindex="-1" hidden>
+        <p class="quiz-score-total" id="quiz-score-total"></p>
+        <p id="quiz-score-message"></p>
+        <button type="button" id="quiz-retake">Take the quiz again</button>
+      </div>
+    </section>
+
+    <!-- Not from a slide: hands-on practice with the ideas from the lessons -->
+    <section class="tab-panel" id="simulator" data-tab="simulator" aria-labelledby="simulator-title">
+      <h2 id="simulator-title" tabindex="-1">Practice simulator</h2>
+      <p>
+        Reading about code is one thing; watching it run is another. Use
+        these two tools to experiment with the programs and conditions from
+        the lessons. Try different numbers and see what changes.
+      </p>
+      <noscript>
+        <p class="key-term">The simulator needs JavaScript turned on in your browser.</p>
+      </noscript>
+
+      <div class="sim" id="branch-sim" hidden>
+        <h3>Part 1: Step through a program</h3>
+        <p>
+          Choose a program and the number to type in. Then press
+          <strong>Step</strong> to run it one line at a time. The highlighted
+          line is the one running now. Each condition shows whether it was
+          true or false, and lines that never ran fade out at the end.
+        </p>
+        <div class="sim-controls">
+          <div>
+            <label for="sim-program">Program</label>
+            <select id="sim-program">
+              <option value="vote-if">Voting age: if</option>
+              <option value="vote-if-else">Voting age: if…else</option>
+              <option value="sales-nested">Sales bonus: nested if…else</option>
+              <option value="sales-else-if">Sales bonus: if…else if</option>
+            </select>
+          </div>
+          <div>
+            <label for="sim-input" id="sim-input-label">Age to type in</label>
+            <input type="number" id="sim-input" inputmode="numeric" step="1" value="17">
+          </div>
+        </div>
+        <div class="sim-buttons">
+          <button type="button" id="sim-step">Step</button>
+          <button type="button" id="sim-run">Run to the end</button>
+          <button type="button" id="sim-reset">Start again</button>
+        </div>
+        <p class="sim-error" id="sim-error" role="alert"></p>
+        <pre class="sim-code" id="sim-code" aria-label="Program code"></pre>
+        <h4>What happened</h4>
+        <ol class="sim-log" id="sim-log" aria-live="polite"></ol>
+        <h4>Output on screen</h4>
+        <pre class="sim-output" id="sim-output" aria-label="Program output"></pre>
+      </div>
+
+      <div class="sim" id="condition-sim" hidden>
+        <h3>Part 2: Work out a condition</h3>
+        <p>
+          Type a condition using whole numbers, brackets, arithmetic
+          (<code>+ - * / %</code>) and comparisons
+          (<code>== != &lt; &lt;= &gt; &gt;=</code>). The calculator works it
+          out one operator at a time, in the order C uses, and explains each
+          step.
+        </p>
+        <form id="calc-form">
+          <label for="calc-input">Condition</label>
+          <div class="calc-row">
+            <input type="text" id="calc-input" value="(8 - 5) &gt; 3 != 6" autocomplete="off" spellcheck="false">
+            <button type="submit">Work it out</button>
+          </div>
+        </form>
+        <p class="calc-examples">
+          Or try one of these:
+          <button type="button" class="calc-example">(8 - 5) &gt; 3 != 6</button>
+          <button type="button" class="calc-example">2 + 3 &gt; 4</button>
+          <button type="button" class="calc-example">10 % 3 == 1</button>
+          <button type="button" class="calc-example">2 * (3 + 4) &lt;= 14</button>
+          <button type="button" class="calc-example">7 / 2 == 3</button>
+        </p>
+        <div class="calc-result" id="calc-result" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

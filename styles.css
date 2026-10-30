@@ -79,8 +79,38 @@ button:disabled {
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1rem;
+}
+
+/* Tabs: Lesson, Quiz, Simulator */
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 1rem;
   border-bottom: 1px solid var(--border);
+}
+
+.tabs a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  color: var(--link);
+  text-decoration: none;
+}
+
+.tabs a:hover {
+  text-decoration: underline;
+}
+
+.tabs a[aria-current="page"] {
+  margin-bottom: -1px; /* covers the line under the tabs, so it looks attached */
+  border-color: var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-weight: bold;
 }
 
 /* Layout: menu above the lesson on phones, beside it on wider screens */
@@ -111,8 +141,26 @@ button:disabled {
   text-decoration: none;
 }
 
-main {
+.lesson-content,
+.tab-panel {
   min-width: 0; /* lets wide code blocks scroll instead of stretching the page */
+}
+
+/* The Quiz and Simulator tabs use the full width, not the menu column */
+.tab-panel {
+  grid-column: 1 / -1;
+}
+
+.tab-panel > p {
+  max-width: 65ch;
+}
+
+.tab-panel > h2:first-child {
+  margin-top: 0;
+}
+
+.tab-panel h2:focus {
+  outline: none;
 }
 
 .lesson {
@@ -370,6 +418,34 @@ td {
 
 .calc-example {
   font-family: ui-monospace, Consolas, "Courier New", monospace;
+}
+
+/* Quiz tab */
+
+.quiz-progress {
+  color: var(--muted);
+}
+
+.quiz-question:first-child {
+  margin-top: 1rem;
+}
+
+.quiz-score {
+  max-width: 65ch;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 2px solid var(--link);
+  background: var(--callout-bg);
+}
+
+.quiz-score:focus {
+  outline: none;
+}
+
+.quiz-score-total {
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 /* Previous / next buttons */

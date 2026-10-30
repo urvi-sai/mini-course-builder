@@ -1,5 +1,5 @@
-// "Try it yourself" section: a branch stepper (Part 1) and a condition
-// calculator (Part 2). Both only appear when JavaScript is running.
+// Simulator tab: a branch stepper (Part 1) and a condition calculator
+// (Part 2). Both only appear when JavaScript is running.
 
 // ---------------------------------------------------------------------------
 // Part 1: step through a program

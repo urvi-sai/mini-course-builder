@@ -8,11 +8,12 @@
 
 ## Project Structure
 
-- `index.html` – the whole course: header, lesson menu, and one
-  `<section class="lesson">` per slide
+- `index.html` – the whole course: header, tabs, lesson menu, one
+  `<section class="lesson">` per slide, and the Quiz and Simulator panels
 - `styles.css` – layout, light/dark colors (CSS variables), responsive rules
-- `script.js` – theme toggle, lesson switching, and check-in questions
-- `simulator.js` – the "Try it yourself" section: program stepper and
+- `script.js` – theme toggle, tab and lesson switching, check-in questions,
+  and quiz scoring
+- `simulator.js` – the Simulator tab: program stepper and
   condition calculator
 - `README.md` – short project readme
 - `CLAUDE.md` – this file
@@ -37,8 +38,9 @@ into folders. Ask before introducing a folder structure.
 ## Feature Plan
 
 A one-time mini-course site built from the user's slide deck. It's for
-complete beginners. All lessons live in one page, and JavaScript shows one
-lesson at a time (no separate pages). Visitors don't upload anything.
+complete beginners. Everything lives in one page, split into three tabs
+(Lesson, Quiz, Simulator) that JavaScript switches between (no separate
+pages). Visitors don't upload anything.
 
 ### Site structure
 
@@ -51,14 +53,22 @@ lesson at a time (no separate pages). Visitors don't upload anything.
    "key term" callouts and one check-in question at the end (multiple
    choice or a short typed answer). Checking it shows right/wrong plus a
    short explanation, then locks it. It never blocks moving on.
-5. **Try it yourself**: an interactive section after the lessons. Part 1
-   steps through the lesson programs line by line for a chosen input. Part 2
-   works out a typed condition one operator at a time, in C's precedence order.
-6. **Recap**: key takeaways, each linking back to its lesson.
+5. **Recap**: key takeaways, each linking back to its lesson.
 
-Students move between lessons with the lesson menu or the Previous / Next
-buttons. The menu highlights the current lesson, and the address bar
-(`#lesson-id`) keeps track of it so Back and bookmarks work.
+Items 2–5 are in the **Lesson tab**. The other two tabs are:
+
+- **Quiz tab**: 8 questions covering the whole course, using the same
+  check-in style. It shows "Answered X of 8", then the score once all 8 are
+  answered, with a button to take it again.
+- **Simulator tab** (heading "Practice simulator"): Part 1 steps through the
+  lesson programs line by line for a chosen input. Part 2 works out a typed
+  condition one operator at a time, in C's precedence order.
+
+Students switch tabs with the tab links, and move between lessons with the
+lesson menu or the Previous / Next buttons. The address bar keeps track of
+where they are (`#quiz`, `#simulator`, or `#lesson-id`), so Back and
+bookmarks work. Going back to the Lesson tab returns to the last lesson
+viewed. Without JavaScript, everything shows on one long page.
 
 ### Phases
 
@@ -67,7 +77,8 @@ buttons. The menu highlights the current lesson, and the address bar
   layout, and the light/dark toggle (light by default).
 - **Phase 2: Navigation.** Make the menu collapsible on phones and add the
   progress bar (how far through the course you are).
-- **Phase 3: Practice and recap.** *(Check-ins done: one per lesson,
-  nothing saved.)* Still to do: the recap section.
+- **Phase 3: Practice and recap.** *(Done: one check-in per lesson, the
+  8-question Quiz tab, and the Simulator tab. Nothing is saved.)* Still to
+  do: the recap section.
 - **Phase 4: Check and polish.** Test on phone, tablet, and desktop in
   both themes. Check keyboard use and readability.
