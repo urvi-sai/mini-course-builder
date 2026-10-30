@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Making Decisions in C</title>
+  <script>
+    // Apply a saved dark theme before the page draws, so it doesn't flash light first.
+    try {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <h1>Making Decisions in C</h1>
+      <p class="subtitle">A beginner's mini-course on selection structures</p>
+    </div>
+    <button type="button" id="theme-toggle">Switch to dark theme</button>
+  </header>
+
+  <div class="layout">
+    <nav id="lesson-menu" aria-label="Lessons">
+      <h2>Lessons</h2>
+      <ol>
+        <li><a href="#outcomes">What you'll learn</a></li>
+        <li><a href="#control-structures">Control structures</a></li>
+        <li><a href="#selection-types">Three kinds of selection</a></li>
+        <li><a href="#single-selection">Single selection: <code>if</code></a></li>
+        <li><a href="#double-selection">Double selection: <code>if…else</code></a></li>
+        <li><a href="#nested-if">Multiple selection: nested <code>if…else</code></a></li>
+        <li><a href="#else-if">Multiple selection: <code>if…else if</code></a></li>
+        <li><a href="#conditions">How a condition decides</a></li>
+        <li><a href="#operators">Equality and relational operators</a></li>
+        <li><a href="#precedence">Precedence and associativity</a></li>
+        <li><a href="#cast">The cast operator</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <!-- Slide 1 -->
+      <section class="lesson" id="outcomes" aria-labelledby="outcomes-title">
+        <h2 id="outcomes-title" tabindex="-1">What you'll learn</h2>
+        <p>
+          Programs often need to make choices: show one message to some users
+          and a different one to others, or pay a bonus only when sales are
+          high enough. In this course you'll learn how a program written in the
+          C programming language makes those choices.
+        </p>
+        <p>By the end, you should be able to:</p>
+        <ul>
+          <li>
+            Use C's <strong>selection statements</strong> (<code>if</code>,
+            <code>if…else</code>, <code>if…else if</code> and nested
+            <code>if…else</code>) to let a program decide what to do.
+          </li>
+          <li>
+            Write the test inside an <code>if</code> statement using
+            <strong>equality and relational operators</strong>: symbols that
+            compare two values, such as "is equal to" or "is less than".
+          </li>
+          <li>
+            Work out the order in which C checks a test that uses several
+            operators, using the <strong>rules of precedence and
+            associativity</strong>.
+          </li>
+        </ul>
+        <p class="key-term">
+          <strong>Key term: selection structure.</strong> A piece of code that
+          picks which instructions to run, depending on whether something is
+          true or false.
+        </p>
+      </section>
+
+      <!-- Slide 2 -->
+      <section class="lesson" id="control-structures" aria-labelledby="control-structures-title">
+        <h2 id="control-structures-title" tabindex="-1">Control structures</h2>
+        <p>
+          A <strong>control structure</strong> sets the order in which a
+          program's instructions run. It may sound surprising, but researchers
+          have shown that every program can be built from just three of them:
+        </p>
+        <ul>
+          <li><strong>Sequence</strong>: run instructions one after another.</li>
+          <li><strong>Selection</strong>: choose which instructions to run.</li>
+          <li><strong>Repetition</strong>: run the same instructions several times.</li>
+        </ul>
+        <p>
+          Sequence is the simplest, and it's what happens unless you say
+          otherwise: the computer runs your C statements one after the other,
+          in the order you wrote them. The comments on the right of this
+          example show that order.
+        </p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int a, b, c;                                // Order of execution
+
+    a = 2;                                      // 1st
+    b = 3;                                      // 2nd
+    c = a + b;                                  // 3rd
+
+    printf("Value of variable c is %d\n", c);   // 4th, value of variable c is 5
+
+    a = 3;                                      // 5th
+
+    printf("Value of variable c is %d\n", c);   // 6th, value of variable c is still 5
+
+    return (0);
+}</code></pre>
+        <p>
+          Notice that <code>c</code> is still 5 at the end, even though
+          <code>a</code> changed to 3. The sum was worked out once, at step 3,
+          and C doesn't go back and redo it. Each line runs once, top to bottom.
+        </p>
+        <p>The rest of this course is about the second structure: selection.</p>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="lesson" id="selection-types" aria-labelledby="selection-types-title">
+        <h2 id="selection-types-title" tabindex="-1">Three kinds of selection</h2>
+        <p>
+          Selection lets a program take different paths depending on a
+          condition. C gives you three kinds, based on how many paths there are
+          to choose from:
+        </p>
+        <ul>
+          <li>
+            <strong>Single selection</strong>: do one thing, or skip it. In C
+            this is the <code>if</code> statement.
+          </li>
+          <li>
+            <strong>Double selection</strong>: pick one of two things to do.
+            This is the <code>if…else</code> statement.
+          </li>
+          <li>
+            <strong>Multiple selection</strong>: pick one of many things to do.
+            You can write this as a nested <code>if…else</code> or as an
+            <code>if…else if</code>.
+          </li>
+        </ul>
+        <p>The next few lessons look at each one in turn.</p>
+      </section>
+
+      <!-- Slide 4 (repeated as slide 11) -->
+      <section class="lesson" id="single-selection" aria-labelledby="single-selection-title">
+        <h2 id="single-selection-title" tabindex="-1">Single selection: <code>if</code></h2>
+        <p>
+          The <code>if</code> statement checks a condition. If the condition is
+          <em>true</em>, the program carries out an action. If it's
+          <em>false</em>, the program skips that action and moves on.
+        </p>
+        <p>
+          This program asks for your age and prints a message only if you're
+          under 21:
+        </p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int age;
+
+    printf("Enter your age: ");
+    scanf("%d", &amp;age);
+
+    if (age &lt; 21)
+    {
+        printf("You cannot vote yet\n");
+    }
+
+    return (0);
+}</code></pre>
+        <p>
+          The condition goes in round brackets after <code>if</code>:
+          <code>(age &lt; 21)</code>. The action goes between the curly braces
+          <code>{ }</code>. If you type 17, you'll see "You cannot vote yet". If
+          you type 25, the program prints nothing and simply ends.
+        </p>
+      </section>
+
+      <!-- Slide 5 (repeated as slide 12) -->
+      <section class="lesson" id="double-selection" aria-labelledby="double-selection-title">
+        <h2 id="double-selection-title" tabindex="-1">Double selection: <code>if…else</code></h2>
+        <p>
+          An <code>if…else</code> statement chooses between two actions. If the
+          condition is true, the first action runs. If it's false, the action
+          after <code>else</code> runs instead. Exactly one of the two always
+          happens, never both and never neither.
+        </p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int age;
+
+    printf("Enter your age: ");
+    scanf("%d", &amp;age);
+
+    if (age &lt; 21)
+    {
+        printf("You cannot vote yet\n");
+    }
+    else
+    {
+        printf("You have reached the legal age for voting\n");
+    }
+
+    return (0);
+}</code></pre>
+        <p>
+          This is the same program as before, with an <code>else</code> part
+          added. Now someone who types 25 also gets a message: "You have reached
+          the legal age for voting".
+        </p>
+      </section>
+
+      <!-- Slide 6 (repeated as slide 13) -->
+      <section class="lesson" id="nested-if" aria-labelledby="nested-if-title">
+        <h2 id="nested-if-title" tabindex="-1">Multiple selection: nested <code>if…else</code></h2>
+        <p>
+          When there are more than two possible outcomes, you can put one
+          <code>if…else</code> inside the <code>else</code> part of another.
+          Putting one statement inside another like this is called
+          <strong>nesting</strong>.
+        </p>
+        <p>This program works out a sales bonus with four possible results:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int sales;
+
+    printf("Enter your sales amount: ");
+    scanf("%d", &amp;sales);
+
+    if (sales &gt; 50000)
+    {
+        printf("You earn a bonus of 1500\n");
+    }
+    else
+    {
+        if (sales &gt; 35000)
+        {
+            printf("You earn a bonus of 500\n");
+        }
+        else
+        {
+            if (sales &gt; 10000)
+            {
+                printf("You earn a bonus of 100\n");
+            }
+            else
+            {
+                printf("You are not entitled to any bonus\n");
+            }
+        }
+    }
+
+    return (0);
+}</code></pre>
+        <p>
+          Read it from the top. Each <code>else</code> holds the next decision,
+          one layer deeper. The program stops at the first condition that's
+          true. For a sales amount of 40000, the first test
+          (<code>sales &gt; 50000</code>) is false, so it moves into the
+          <code>else</code>. The next test (<code>sales &gt; 35000</code>) is
+          true, so it prints "You earn a bonus of 500" and skips everything
+          else.
+        </p>
+      </section>
+
+      <!-- Slide 7 (repeated as slide 14) -->
+      <section class="lesson" id="else-if" aria-labelledby="else-if-title">
+        <h2 id="else-if-title" tabindex="-1">Multiple selection: <code>if…else if</code></h2>
+        <p>
+          The nested version in the last lesson works, but each new choice
+          pushes the code further to the right. You can often write the same
+          logic as an <code>if…else if</code> chain instead:
+        </p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int sales;
+
+    printf("Enter your sales amount: ");
+    scanf("%d", &amp;sales);
+
+    if (sales &gt; 50000)
+    {
+        printf("You earn a bonus of 1500\n");
+    }
+    else if (sales &gt; 35000)
+    {
+        printf("You earn a bonus of 500\n");
+    }
+    else if (sales &gt; 10000)
+    {
+        printf("You earn a bonus of 100\n");
+    }
+    else
+    {
+        printf("You are not entitled to any bonus\n");
+    }
+
+    return (0);
+}</code></pre>
+        <p>
+          The two versions do exactly the same thing. They check the conditions
+          in the same order, and the first true one wins. Most programmers
+          prefer <code>if…else if</code> because it avoids deep
+          <strong>indentation</strong> (the spaces at the start of each line).
+          That makes the code flatter and easier to read.
+        </p>
+      </section>
+
+      <!-- Slide 8 -->
+      <section class="lesson" id="conditions" aria-labelledby="conditions-title">
+        <h2 id="conditions-title" tabindex="-1">How a condition decides</h2>
+        <p>
+          Every <code>if</code> statement makes its decision based on its
+          <strong>condition</strong>: the test in round brackets. You can think
+          of the condition as a yes-or-no question.
+        </p>
+        <ul>
+          <li>
+            If the answer is yes (the condition is <em>true</em>), the
+            statements in the <strong>body</strong> of the <code>if</code> run.
+            The body is the code between its curly braces.
+          </li>
+          <li>
+            If the answer is no (the condition is <em>false</em>), the body is
+            skipped. If there's an <code>else</code>, its body runs instead.
+          </li>
+        </ul>
+        <p>The comments in this example show which path is taken, and when:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int age;
+
+    printf("Enter your age: ");
+    scanf("%d", &amp;age);
+
+    if (age &lt; 21)                              // if (age &lt; 21) evaluates to true
+    {
+        printf("You cannot vote yet\n");       // this statement in the if body will be executed
+    }
+    else                                       // if (age &lt; 21) evaluates to false
+    {
+        printf("You have reached the legal age for voting\n");   // this statement will be executed
+    }
+
+    return (0);
+}</code></pre>
+      </section>
+
+      <!-- Slide 9 -->
+      <section class="lesson" id="operators" aria-labelledby="operators-title">
+        <h2 id="operators-title" tabindex="-1">Equality and relational operators</h2>
+        <p>
+          Conditions are usually built by comparing two values. C has six
+          comparison symbols. <strong>Equality operators</strong> check whether
+          two values are the same or different. <strong>Relational
+          operators</strong> check which value is bigger or smaller.
+        </p>
+        <p>
+          Most look like the maths symbols you already know. A few are typed
+          differently, because keyboards don't have keys for ≠, ≥ or ≤:
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">In maths</th>
+                <th scope="col">In C</th>
+                <th scope="col">Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>=</td><td><code>==</code></td><td>Equal to</td></tr>
+              <tr><td>≠</td><td><code>!=</code></td><td>Not equal to</td></tr>
+              <tr><td>&gt;</td><td><code>&gt;</code></td><td>Greater than</td></tr>
+              <tr><td>&lt;</td><td><code>&lt;</code></td><td>Less than</td></tr>
+              <tr><td>≥</td><td><code>&gt;=</code></td><td>Greater than or equal to</td></tr>
+              <tr><td>≤</td><td><code>&lt;=</code></td><td>Less than or equal to</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Watch out for "equal to": it's written with <em>two</em> equals
+          signs, <code>==</code>. A single <code>=</code> means something else
+          in C: it stores a value in a variable, as in <code>a = 2;</code>.
+        </p>
+      </section>
+
+      <!-- Slide 10 -->
+      <section class="lesson" id="precedence" aria-labelledby="precedence-title">
+        <h2 id="precedence-title" tabindex="-1">Precedence and associativity</h2>
+        <p>
+          When a condition contains several operators, C needs to know which
+          one to work out first. Two rules decide this:
+        </p>
+        <ul>
+          <li>
+            <strong>Precedence</strong> is which operator goes first. It's like
+            the maths rule that you multiply before you add.
+          </li>
+          <li>
+            <strong>Associativity</strong> decides between operators that have
+            the same precedence: whether to work through them from left to
+            right or from right to left.
+          </li>
+        </ul>
+        <p>
+          The table covers the arithmetic, relational and equality operators
+          you've met so far. The higher a row is, the earlier its operators
+          are worked out.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Operators (highest precedence first)</th>
+                <th scope="col">Associativity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>( )</code></td><td>Left to right</td></tr>
+              <tr><td><code>*  /  %</code></td><td>Left to right</td></tr>
+              <tr><td><code>+  -</code></td><td>Left to right</td></tr>
+              <tr><td><code>&lt;  &lt;=  &gt;  &gt;=</code></td><td>Left to right</td></tr>
+              <tr><td><code>==  !=</code></td><td>Left to right</td></tr>
+              <tr><td><code>=</code></td><td>Right to left</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Let's work through <code>(8 - 5) &gt; 3 != 6</code> step by step.
+          One thing to know first: in C, a comparison that's true gives the
+          number 1, and one that's false gives 0.
+        </p>
+        <ol>
+          <li>
+            Brackets come first. <code>(8 - 5)</code> is 3, which leaves
+            <code>3 &gt; 3 != 6</code>.
+          </li>
+          <li>
+            <code>&gt;</code> has higher precedence than <code>!=</code>, so it
+            goes next. 3 is not greater than 3, so <code>3 &gt; 3</code> is
+            false and becomes 0. That leaves <code>0 != 6</code>.
+          </li>
+          <li>
+            0 really is not equal to 6, so <code>0 != 6</code> is true and
+            gives 1.
+          </li>
+        </ol>
+        <p>The final result is 1, which means true.</p>
+      </section>
+
+      <!-- Slide 15 -->
+      <section class="lesson" id="cast" aria-labelledby="cast-title">
+        <h2 id="cast-title" tabindex="-1">The cast operator</h2>
+        <p>
+          Every value in C has a <strong>data type</strong>: the kind of value
+          it is. For example, <code>int</code> holds whole numbers like 13, and
+          <code>float</code> holds numbers with decimals like 13.45. Sometimes
+          you need to change a value from one type to another. This is called a
+          <strong>type conversion</strong>.
+        </p>
+        <p>There are two ways this can happen:</p>
+        <ul>
+          <li>
+            <strong>Implicitly</strong>: the compiler (the tool that turns your
+            C code into a program) converts the value for you, automatically.
+          </li>
+          <li>
+            <strong>Explicitly</strong>: you ask for the conversion yourself
+            using the <strong>cast operator</strong>. You write the type you
+            want in round brackets in front of the value:
+            <code>(type_name) expression</code>.
+          </li>
+        </ul>
+        <p>
+          It's good practice to use a cast whenever you need a conversion. That
+          way, anyone reading your code can see the conversion is deliberate.
+        </p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int approx_dimension;
+    float exact_dimension = 13.45;
+
+    approx_dimension = (int) exact_dimension;
+
+    printf("Approximate dimension:%d\n", approx_dimension);
+    printf("Exact dimension: %0.2f\n", exact_dimension);
+    return 0;
+}</code></pre>
+        <p>
+          Here, <code>(int) exact_dimension</code> turns 13.45 into the whole
+          number 13. The program prints "Approximate dimension:13" and then
+          "Exact dimension: 13.45". Note that casting to <code>int</code> drops
+          the decimal part instead of rounding, so even 13.99 would become 13.
+        </p>
+      </section>
+
+      <nav class="lesson-pager" aria-label="Previous and next lesson" hidden>
+        <button type="button" id="prev-lesson">← Previous</button>
+        <span id="lesson-position" aria-live="polite"></span>
+        <button type="button" id="next-lesson">Next →</button>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

@@ -8,10 +8,14 @@
 
 ## Project Structure
 
-The project is nearly empty for now:
-
+- `index.html` – the whole course: header, lesson menu, and one
+  `<section class="lesson">` per slide
+- `styles.css` – layout, light/dark colors (CSS variables), responsive rules
+- `script.js` – theme toggle and lesson switching
 - `README.md` – short project readme
 - `CLAUDE.md` – this file
+
+The source slide deck is not stored in the repository.
 
 Keep new files at the top level until there is a reason to organize them
 into folders. Ask before introducing a folder structure.
@@ -30,9 +34,9 @@ into folders. Ask before introducing a folder structure.
 
 ## Feature Plan
 
-A one-time mini-course site built from 3–5 slides (PDF or PowerPoint) that the
-user will share. It's for complete beginners. All lessons are on one long
-scrolling page. Visitors don't upload anything.
+A one-time mini-course site built from the user's slide deck. It's for
+complete beginners. All lessons live in one page, and JavaScript shows one
+lesson at a time (no separate pages). Visitors don't upload anything.
 
 ### Site structure
 
@@ -45,16 +49,17 @@ scrolling page. Visitors don't upload anything.
    "key term" callouts and a short quiz at the end.
 5. **Recap**: key takeaways, each linking back to its lesson.
 
-Students move through the page by scrolling or by using the lesson menu.
-The menu highlights the lesson currently on screen.
+Students move between lessons with the lesson menu or the Previous / Next
+buttons. The menu highlights the current lesson, and the address bar
+(`#lesson-id`) keeps track of it so Back and bookmarks work.
 
 ### Phases
 
-- **Phase 1: Course from the slides.** Ask for the slides. Pull out the topic
-  and learning goals, then confirm them with the user. Build the page with the intro and
-  lessons, a responsive layout, and the light/dark toggle (light by default).
-- **Phase 2: Navigation.** Add the lesson menu (with current-lesson
-  highlight) and the progress bar.
+- **Phase 1: Course from the slides.** *(Done: plain styling.)* One lesson
+  per slide, a basic lesson menu with Previous / Next switching, a responsive
+  layout, and the light/dark toggle (light by default).
+- **Phase 2: Navigation.** Make the menu collapsible on phones and add the
+  progress bar (how far through the course you are).
 - **Phase 3: Practice and recap.** Add 2–3 quiz questions per lesson
   with instant feedback (nothing saved), plus the recap section.
 - **Phase 4: Check and polish.** Test on phone, tablet, and desktop in

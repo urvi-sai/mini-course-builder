@@ -1,0 +1,189 @@
+/* Plain starter styles. The visual design comes later. */
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #555555;
+  --border: #cccccc;
+  --code-bg: #f3f3f3;
+  --link: #0b57d0;
+  --callout-bg: #eef3fb;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121212;
+  --text: #e6e6e6;
+  --muted: #a8a8a8;
+  --border: #444444;
+  --code-bg: #1f1f1f;
+  --link: #8ab4f8;
+  --callout-bg: #1b2433;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--link);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+h2 {
+  line-height: 1.3;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+button {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* Header */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Layout: menu above the lesson on phones, beside it on wider screens */
+
+.layout {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+#lesson-menu h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+#lesson-menu ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+#lesson-menu li {
+  margin-bottom: 0.4rem;
+}
+
+#lesson-menu a[aria-current="page"] {
+  font-weight: bold;
+  color: var(--text);
+  text-decoration: none;
+}
+
+main {
+  min-width: 0; /* lets wide code blocks scroll instead of stretching the page */
+}
+
+.lesson {
+  max-width: 65ch;
+}
+
+.lesson > h2:first-child {
+  margin-top: 0;
+}
+
+.lesson h2:focus {
+  outline: none;
+}
+
+@media (min-width: 48rem) {
+  .layout {
+    grid-template-columns: 16rem 1fr;
+  }
+
+  #lesson-menu {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+  }
+}
+
+/* Code and tables */
+
+code {
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.key-term {
+  padding: 0.75rem 1rem;
+  background: var(--callout-bg);
+  border-left: 4px solid var(--link);
+}
+
+/* Previous / next buttons */
+
+.lesson-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 65ch;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+#lesson-position {
+  color: var(--muted);
+}
