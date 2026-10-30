@@ -11,7 +11,7 @@
 - `index.html` – the whole course: header, lesson menu, and one
   `<section class="lesson">` per slide
 - `styles.css` – layout, light/dark colors (CSS variables), responsive rules
-- `script.js` – theme toggle and lesson switching
+- `script.js` – theme toggle, lesson switching, and check-in questions
 - `README.md` – short project readme
 - `CLAUDE.md` – this file
 
@@ -46,7 +46,9 @@ lesson at a time (no separate pages). Visitors don't upload anything.
 3. **Lesson menu**: links that jump to each lesson. Collapsible on phones,
    a sidebar that stays in view on desktop.
 4. **Lessons 1–N**: one per slide, rewritten in plain language, with
-   "key term" callouts and a short quiz at the end.
+   "key term" callouts and one check-in question at the end (multiple
+   choice or a short typed answer). Checking it shows right/wrong plus a
+   short explanation, then locks it. It never blocks moving on.
 5. **Recap**: key takeaways, each linking back to its lesson.
 
 Students move between lessons with the lesson menu or the Previous / Next
@@ -60,7 +62,7 @@ buttons. The menu highlights the current lesson, and the address bar
   layout, and the light/dark toggle (light by default).
 - **Phase 2: Navigation.** Make the menu collapsible on phones and add the
   progress bar (how far through the course you are).
-- **Phase 3: Practice and recap.** Add 2–3 quiz questions per lesson
-  with instant feedback (nothing saved), plus the recap section.
+- **Phase 3: Practice and recap.** *(Check-ins done: one per lesson,
+  nothing saved.)* Still to do: the recap section.
 - **Phase 4: Check and polish.** Test on phone, tablet, and desktop in
   both themes. Check keyboard use and readability.

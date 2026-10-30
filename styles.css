@@ -9,6 +9,8 @@
   --code-bg: #f3f3f3;
   --link: #0b57d0;
   --callout-bg: #eef3fb;
+  --correct: #1a7f37;
+  --wrong: #b3261e;
 }
 
 :root[data-theme="dark"] {
@@ -20,6 +22,8 @@
   --code-bg: #1f1f1f;
   --link: #8ab4f8;
   --callout-bg: #1b2433;
+  --correct: #6fd08c;
+  --wrong: #ff8a80;
 }
 
 * {
@@ -168,6 +172,79 @@ td {
   padding: 0.75rem 1rem;
   background: var(--callout-bg);
   border-left: 4px solid var(--link);
+}
+
+/* Check-in questions */
+
+.check-in {
+  max-width: 65ch;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.check-in fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.check-in legend,
+.check-in > label {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-weight: bold;
+}
+
+.check-in-label {
+  color: var(--muted);
+}
+
+.check-in fieldset label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 44px;
+}
+
+.check-in input[type="text"] {
+  display: block;
+  width: 8rem;
+  min-height: 44px;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+}
+
+.check-in button {
+  margin-top: 0.5rem;
+}
+
+.check-in-result:focus {
+  outline: none;
+}
+
+.check-in-verdict {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.check-in-verdict:empty {
+  display: none;
+}
+
+.check-in-verdict.is-correct {
+  color: var(--correct);
+}
+
+.check-in-verdict.is-wrong {
+  color: var(--wrong);
+}
+
+.check-in-explanation {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
 }
 
 /* Previous / next buttons */

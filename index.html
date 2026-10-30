@@ -75,6 +75,19 @@
           picks which instructions to run, depending on whether something is
           true or false.
         </p>
+        <form class="check-in" data-answer="b" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> What does a selection structure do?</legend>
+            <label><input type="radio" name="q-outcomes" value="a"> Runs the same instructions several times</label>
+            <label><input type="radio" name="q-outcomes" value="b"> Picks which instructions to run, depending on whether something is true or false</label>
+            <label><input type="radio" name="q-outcomes" value="c"> Runs every instruction in the order it was written</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is: it picks which instructions to run. Running instructions several times is repetition, and running them in order is sequence.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 2 -->
@@ -120,6 +133,15 @@ int main(void)
           and C doesn't go back and redo it. Each line runs once, top to bottom.
         </p>
         <p>The rest of this course is about the second structure: selection.</p>
+        <form class="check-in" data-answer="5" hidden>
+          <label for="q-control-structures"><span class="check-in-label">Check-in:</span> In the example program, what value does the second <code>printf</code> show for <code>c</code>? Type a number.</label>
+          <input type="text" id="q-control-structures" autocomplete="off" spellcheck="false">
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is 5. <code>c</code> was worked out once, at step 3, when <code>a</code> was still 2. Changing <code>a</code> to 3 later doesn't go back and change <code>c</code>.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 3 -->
@@ -146,6 +168,19 @@ int main(void)
           </li>
         </ul>
         <p>The next few lessons look at each one in turn.</p>
+        <form class="check-in" data-answer="c" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> A program must choose one of four possible bonus amounts. Which kind of selection does it need?</legend>
+            <label><input type="radio" name="q-selection-types" value="a"> Single selection</label>
+            <label><input type="radio" name="q-selection-types" value="b"> Double selection</label>
+            <label><input type="radio" name="q-selection-types" value="c"> Multiple selection</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is multiple selection. Single selection is for "do it or skip it", double selection is for two choices, and anything more than two needs multiple selection.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 4 (repeated as slide 11) -->
@@ -182,6 +217,19 @@ int main(void)
           <code>{ }</code>. If you type 17, you'll see "You cannot vote yet". If
           you type 25, the program prints nothing and simply ends.
         </p>
+        <form class="check-in" data-answer="a" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> In the example program, what is printed if you type 25?</legend>
+            <label><input type="radio" name="q-single-selection" value="a"> Nothing</label>
+            <label><input type="radio" name="q-single-selection" value="b"> You cannot vote yet</label>
+            <label><input type="radio" name="q-single-selection" value="c"> You have reached the legal age for voting</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is nothing. <code>25 &lt; 21</code> is false, so the program skips the body of the <code>if</code>, and there's no <code>else</code> to run instead.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 5 (repeated as slide 12) -->
@@ -218,6 +266,19 @@ int main(void)
           added. Now someone who types 25 also gets a message: "You have reached
           the legal age for voting".
         </p>
+        <form class="check-in" data-answer="b" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> In an <code>if…else</code> statement, how many of the two actions run?</legend>
+            <label><input type="radio" name="q-double-selection" value="a"> Both of them</label>
+            <label><input type="radio" name="q-double-selection" value="b"> Exactly one of them</label>
+            <label><input type="radio" name="q-double-selection" value="c"> One of them, or sometimes neither</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is exactly one. If the condition is true, the <code>if</code> part runs. Otherwise the <code>else</code> part runs. Never both, and never neither.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 6 (repeated as slide 13) -->
@@ -273,6 +334,20 @@ int main(void)
           true, so it prints "You earn a bonus of 500" and skips everything
           else.
         </p>
+        <form class="check-in" data-answer="c" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> Someone enters a sales amount of 20000. Which message do they see?</legend>
+            <label><input type="radio" name="q-nested-if" value="a"> You earn a bonus of 1500</label>
+            <label><input type="radio" name="q-nested-if" value="b"> You earn a bonus of 500</label>
+            <label><input type="radio" name="q-nested-if" value="c"> You earn a bonus of 100</label>
+            <label><input type="radio" name="q-nested-if" value="d"> You are not entitled to any bonus</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is a bonus of 100. 20000 is not more than 50000 or 35000, so those tests are false. It is more than 10000, so that test is the first one that's true.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 7 (repeated as slide 14) -->
@@ -318,6 +393,19 @@ int main(void)
           <strong>indentation</strong> (the spaces at the start of each line).
           That makes the code flatter and easier to read.
         </p>
+        <form class="check-in" data-answer="a" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> How does the <code>if…else if</code> version compare with the nested <code>if…else</code> version?</legend>
+            <label><input type="radio" name="q-else-if" value="a"> Same results, but flatter and easier to read</label>
+            <label><input type="radio" name="q-else-if" value="b"> Different results, because it checks the conditions in a different order</label>
+            <label><input type="radio" name="q-else-if" value="c"> Same results, but it always checks every condition</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is same results, but easier to read. Both versions check the conditions in the same order and stop at the first true one. The chain just avoids deep indentation.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 8 -->
@@ -360,6 +448,19 @@ int main(void)
 
     return (0);
 }</code></pre>
+        <form class="check-in" data-answer="b" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> An <code>if</code> statement's condition is false, and there is no <code>else</code>. What happens?</legend>
+            <label><input type="radio" name="q-conditions" value="a"> The body runs anyway</label>
+            <label><input type="radio" name="q-conditions" value="b"> The body is skipped and the program carries on</label>
+            <label><input type="radio" name="q-conditions" value="c"> The program stops with an error</label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is: the body is skipped and the program carries on. A false condition simply means "don't run this part". It's not an error.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 9 -->
@@ -399,6 +500,19 @@ int main(void)
           signs, <code>==</code>. A single <code>=</code> means something else
           in C: it stores a value in a variable, as in <code>a = 2;</code>.
         </p>
+        <form class="check-in" data-answer="c" hidden>
+          <fieldset>
+            <legend><span class="check-in-label">Check-in:</span> Which condition checks whether <code>x</code> is equal to 10?</legend>
+            <label><input type="radio" name="q-operators" value="a"> <code>x = 10</code></label>
+            <label><input type="radio" name="q-operators" value="b"> <code>x =&gt; 10</code></label>
+            <label><input type="radio" name="q-operators" value="c"> <code>x == 10</code></label>
+          </fieldset>
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is <code>x == 10</code>. A single <code>=</code> stores 10 in <code>x</code> instead of comparing, and <code>=&gt;</code> isn't a C operator at all. ("Greater than or equal to" is <code>&gt;=</code>.)</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 10 -->
@@ -463,6 +577,15 @@ int main(void)
           </li>
         </ol>
         <p>The final result is 1, which means true.</p>
+        <form class="check-in" data-answer="1|true" hidden>
+          <label for="q-precedence"><span class="check-in-label">Check-in:</span> What does <code>2 + 3 &gt; 4</code> give in C? Type a number.</label>
+          <input type="text" id="q-precedence" autocomplete="off" spellcheck="false">
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is 1, which means true. <code>+</code> has higher precedence than <code>&gt;</code>, so C works out <code>2 + 3</code> first to get 5. Then <code>5 &gt; 4</code> is true, which gives 1.</p>
+          </div>
+        </form>
       </section>
 
       <!-- Slide 15 -->
@@ -511,6 +634,15 @@ int main(void)
           "Exact dimension: 13.45". Note that casting to <code>int</code> drops
           the decimal part instead of rounding, so even 13.99 would become 13.
         </p>
+        <form class="check-in" data-answer="7" hidden>
+          <label for="q-cast"><span class="check-in-label">Check-in:</span> What is the value of <code>(int) 7.9</code>? Type a number.</label>
+          <input type="text" id="q-cast" autocomplete="off" spellcheck="false">
+          <button type="submit">Check answer</button>
+          <div class="check-in-result" tabindex="-1">
+            <p class="check-in-verdict"></p>
+            <p class="check-in-explanation" hidden>The answer is 7. Casting to <code>int</code> drops the decimal part. It doesn't round up, so 7.9 becomes 7, not 8.</p>
+          </div>
+        </form>
       </section>
 
       <nav class="lesson-pager" aria-label="Previous and next lesson" hidden>

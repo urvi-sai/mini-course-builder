@@ -80,3 +80,46 @@ window.addEventListener('hashchange', () => showLesson(lessonIndexFromHash(), tr
 
 pager.hidden = false;
 showLesson(lessonIndexFromHash(), false);
+
+// Check-in questions: one per lesson, answered on the page (nothing is saved).
+// Each form's data-answer lists the accepted answers, separated by "|".
+// Like the Previous / Next buttons, they only appear when JavaScript is running.
+
+document.querySelectorAll('.check-in').forEach((form) => {
+  const textInput = form.querySelector('input[type="text"]');
+  const result = form.querySelector('.check-in-result');
+  const verdict = form.querySelector('.check-in-verdict');
+  const explanation = form.querySelector('.check-in-explanation');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // stay on the page instead of submitting the form
+
+    let response = '';
+    if (textInput) {
+      response = textInput.value.trim().toLowerCase();
+    } else {
+      const chosen = form.querySelector('input[type="radio"]:checked');
+      response = chosen ? chosen.value : '';
+    }
+
+    if (!response) {
+      verdict.textContent = textInput ? 'Type an answer first.' : 'Choose an answer first.';
+      result.focus();
+      return;
+    }
+
+    const correct = form.dataset.answer.split('|').includes(response);
+    verdict.textContent = correct ? 'Correct!' : 'Not quite.';
+    verdict.classList.add(correct ? 'is-correct' : 'is-wrong');
+    explanation.hidden = false;
+
+    // Lock the question, then move focus to the result so it's read out and
+    // the Next button is the next stop for keyboard users.
+    form.querySelectorAll('input, button').forEach((el) => {
+      el.disabled = true;
+    });
+    result.focus();
+  });
+
+  form.hidden = false;
+});
