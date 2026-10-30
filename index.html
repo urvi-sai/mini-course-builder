@@ -14,6 +14,7 @@
   </script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
+  <script src="simulator.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -39,6 +40,7 @@
         <li><a href="#operators">Equality and relational operators</a></li>
         <li><a href="#precedence">Precedence and associativity</a></li>
         <li><a href="#cast">The cast operator</a></li>
+        <li><a href="#simulator">Try it yourself</a></li>
       </ol>
     </nav>
 
@@ -643,6 +645,82 @@ int main(void)
             <p class="check-in-explanation" hidden>The answer is 7. Casting to <code>int</code> drops the decimal part. It doesn't round up, so 7.9 becomes 7, not 8.</p>
           </div>
         </form>
+      </section>
+
+      <!-- Not from a slide: hands-on practice with the ideas from the lessons -->
+      <section class="lesson" id="simulator" aria-labelledby="simulator-title">
+        <h2 id="simulator-title" tabindex="-1">Try it yourself</h2>
+        <p>
+          Reading about code is one thing; watching it run is another. Use
+          these two tools to experiment with the programs and conditions from
+          the lessons. Try different numbers and see what changes.
+        </p>
+        <noscript>
+          <p class="key-term">The simulator needs JavaScript turned on in your browser.</p>
+        </noscript>
+
+        <div class="sim" id="branch-sim" hidden>
+          <h3>Part 1: Step through a program</h3>
+          <p>
+            Choose a program and the number to type in. Then press
+            <strong>Step</strong> to run it one line at a time. The highlighted
+            line is the one running now. Each condition shows whether it was
+            true or false, and lines that never ran fade out at the end.
+          </p>
+          <div class="sim-controls">
+            <div>
+              <label for="sim-program">Program</label>
+              <select id="sim-program">
+                <option value="vote-if">Voting age: if</option>
+                <option value="vote-if-else">Voting age: if…else</option>
+                <option value="sales-nested">Sales bonus: nested if…else</option>
+                <option value="sales-else-if">Sales bonus: if…else if</option>
+              </select>
+            </div>
+            <div>
+              <label for="sim-input" id="sim-input-label">Age to type in</label>
+              <input type="number" id="sim-input" inputmode="numeric" step="1" value="17">
+            </div>
+          </div>
+          <div class="sim-buttons">
+            <button type="button" id="sim-step">Step</button>
+            <button type="button" id="sim-run">Run to the end</button>
+            <button type="button" id="sim-reset">Start again</button>
+          </div>
+          <p class="sim-error" id="sim-error" role="alert"></p>
+          <pre class="sim-code" id="sim-code" aria-label="Program code"></pre>
+          <h4>What happened</h4>
+          <ol class="sim-log" id="sim-log" aria-live="polite"></ol>
+          <h4>Output on screen</h4>
+          <pre class="sim-output" id="sim-output" aria-label="Program output"></pre>
+        </div>
+
+        <div class="sim" id="condition-sim" hidden>
+          <h3>Part 2: Work out a condition</h3>
+          <p>
+            Type a condition using whole numbers, brackets, arithmetic
+            (<code>+ - * / %</code>) and comparisons
+            (<code>== != &lt; &lt;= &gt; &gt;=</code>). The calculator works it
+            out one operator at a time, in the order C uses, and explains each
+            step.
+          </p>
+          <form id="calc-form">
+            <label for="calc-input">Condition</label>
+            <div class="calc-row">
+              <input type="text" id="calc-input" value="(8 - 5) &gt; 3 != 6" autocomplete="off" spellcheck="false">
+              <button type="submit">Work it out</button>
+            </div>
+          </form>
+          <p class="calc-examples">
+            Or try one of these:
+            <button type="button" class="calc-example">(8 - 5) &gt; 3 != 6</button>
+            <button type="button" class="calc-example">2 + 3 &gt; 4</button>
+            <button type="button" class="calc-example">10 % 3 == 1</button>
+            <button type="button" class="calc-example">2 * (3 + 4) &lt;= 14</button>
+            <button type="button" class="calc-example">7 / 2 == 3</button>
+          </p>
+          <div class="calc-result" id="calc-result" aria-live="polite"></div>
+        </div>
       </section>
 
       <nav class="lesson-pager" aria-label="Previous and next lesson" hidden>

@@ -12,6 +12,8 @@
   `<section class="lesson">` per slide
 - `styles.css` – layout, light/dark colors (CSS variables), responsive rules
 - `script.js` – theme toggle, lesson switching, and check-in questions
+- `simulator.js` – the "Try it yourself" section: program stepper and
+  condition calculator
 - `README.md` – short project readme
 - `CLAUDE.md` – this file
 
@@ -49,7 +51,10 @@ lesson at a time (no separate pages). Visitors don't upload anything.
    "key term" callouts and one check-in question at the end (multiple
    choice or a short typed answer). Checking it shows right/wrong plus a
    short explanation, then locks it. It never blocks moving on.
-5. **Recap**: key takeaways, each linking back to its lesson.
+5. **Try it yourself**: an interactive section after the lessons. Part 1
+   steps through the lesson programs line by line for a chosen input. Part 2
+   works out a typed condition one operator at a time, in C's precedence order.
+6. **Recap**: key takeaways, each linking back to its lesson.
 
 Students move between lessons with the lesson menu or the Previous / Next
 buttons. The menu highlights the current lesson, and the address bar

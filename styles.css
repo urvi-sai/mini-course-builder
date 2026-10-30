@@ -11,6 +11,7 @@
   --callout-bg: #eef3fb;
   --correct: #1a7f37;
   --wrong: #b3261e;
+  --highlight: #fff3b0;
 }
 
 :root[data-theme="dark"] {
@@ -24,6 +25,7 @@
   --callout-bg: #1b2433;
   --correct: #6fd08c;
   --wrong: #ff8a80;
+  --highlight: #4a4220;
 }
 
 * {
@@ -245,6 +247,129 @@ td {
 .check-in-explanation {
   margin-top: 0.25rem;
   margin-bottom: 0;
+}
+
+/* "Try it yourself" simulator */
+
+.sim {
+  max-width: 65ch;
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.sim h3 {
+  margin-top: 0;
+}
+
+.sim h4 {
+  margin-bottom: 0.25rem;
+}
+
+.sim label {
+  display: block;
+  font-weight: bold;
+}
+
+.sim select,
+.sim input[type="text"],
+.sim input[type="number"] {
+  min-height: 44px;
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+}
+
+.sim-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sim-controls input {
+  width: 10rem;
+}
+
+.sim-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.sim-error {
+  color: var(--wrong);
+}
+
+.sim-error:empty {
+  display: none;
+}
+
+.sim-line {
+  display: block;
+  min-height: 1.45em;
+  padding: 0 0.25rem;
+  border-left: 3px solid transparent;
+}
+
+.sim-line.is-ran {
+  border-left-color: var(--link);
+}
+
+.sim-line.is-current {
+  background: var(--highlight);
+}
+
+.sim-code.is-finished .sim-line[data-key]:not(.is-ran) {
+  opacity: 0.45;
+}
+
+.sim-badge {
+  font-weight: bold;
+}
+
+.sim-badge.is-true {
+  color: var(--correct);
+}
+
+.sim-badge.is-false {
+  color: var(--wrong);
+}
+
+.sim-log {
+  margin-top: 0;
+  padding-left: 1.5rem;
+}
+
+.sim-log:empty::before {
+  content: "Nothing yet. Press Step to start.";
+  color: var(--muted);
+}
+
+.sim-output {
+  min-height: 3em;
+  margin-top: 0;
+}
+
+.calc-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.calc-row input {
+  flex: 1 1 12rem;
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+}
+
+.calc-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.calc-example {
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
 }
 
 /* Previous / next buttons */
